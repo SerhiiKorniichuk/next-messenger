@@ -1,14 +1,14 @@
-import { Button, Icon } from '@chakra-ui/react'
+import { Button, ButtonProps, Icon } from '@chakra-ui/react'
 import { FC } from 'react'
 import { IconType } from 'react-icons'
 
-interface SocialButtonProps {
+interface SocialButtonProps extends Omit<ButtonProps, 'children'> {
   icon: IconType
 }
 
-export const SocialButton: FC<SocialButtonProps> = ({ icon }) => {
+export const SocialButton: FC<SocialButtonProps> = ({ icon, ...props }) => {
   return (
-    <Button variant="outline">
+    <Button {...props} variant="outline">
       <Icon as={icon} width={5} height={5} />
     </Button>
   )
