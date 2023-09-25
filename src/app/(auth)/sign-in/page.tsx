@@ -7,6 +7,7 @@ import { SocialButton } from '@/components/SocialButton/SocialButton'
 import { Box, Button, SimpleGrid, Text, VStack } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import { AiFillGithub, AiOutlineGoogle } from 'react-icons/ai'
 import * as yup from 'yup'
@@ -21,6 +22,8 @@ const schema = yup
 
 const SignIn = () => {
   const router = useRouter()
+
+  const [isLoading, setIsLoading] = useState(false)
 
   const goToSignUpPage = () => {
     router.push('/sign-up')
@@ -40,7 +43,9 @@ const SignIn = () => {
   })
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    setIsLoading(true)
     console.log({ data })
+    setIsLoading(false)
   }
 
   return (
@@ -48,15 +53,16 @@ const SignIn = () => {
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <VStack spacing={5}>
           <InputValidation
+            {...register('email')}
             type="email"
             placeholder="Email"
             isValid={!Boolean(errors['email']?.message) && dirtyFields['email']}
-            {...register('email')}
+            isDisabled={isLoading}
           />
 
-          <InputPassword {...register('password')} />
+          <InputPassword {...register('password')} isDisabled={isLoading} />
 
-          <Button type="submit" width="full">
+          <Button type="submit" width="full" isLoading={isLoading}>
             <Text fontSize="md">Sign In</Text>
           </Button>
         </VStack>
@@ -78,7 +84,7 @@ const SignIn = () => {
         size="md"
         onClick={goToSignUpPage}
       >
-        Sign Up
+        Create account
       </Button>
     </Box>
   )
