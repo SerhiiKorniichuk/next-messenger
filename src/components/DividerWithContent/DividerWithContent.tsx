@@ -18,6 +18,8 @@ export const DividerWithContent: FC<DividerWithContentProps> = ({
         fontSize="xs"
         color="gray.400"
         userSelect="none"
+        textAlign="center"
+        whiteSpace="nowrap"
       >
         {children}
       </AbsoluteCenter>
