@@ -1,4 +1,5 @@
-import { Providers } from '@/app/providers'
+import { AuthContext } from '@/app/context/AuthContext'
+import { ChakraContext } from '@/app/context/ChakraContext'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
@@ -15,7 +16,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" data-theme="light">
       <body className={inter.className}>
-        <Providers>{children}</Providers>
+        <ChakraContext>
+          <AuthContext>{children}</AuthContext>
+        </ChakraContext>
       </body>
     </html>
   )
