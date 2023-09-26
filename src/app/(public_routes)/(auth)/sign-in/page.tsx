@@ -4,8 +4,16 @@ import { DividerWithContent } from '@/components/DividerWithContent/DividerWithC
 import { InputPassword } from '@/components/InputPassword/InputPassword'
 import { InputValidation } from '@/components/InputValidation/InputValidation'
 import { SocialButton } from '@/components/SocialButton/SocialButton'
-import { Box, Button, SimpleGrid, Text, VStack } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  SimpleGrid,
+  Text,
+  useToast,
+  VStack,
+} from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
@@ -22,6 +30,7 @@ const schema = yup
 
 const SignIn = () => {
   const router = useRouter()
+  const toast = useToast()
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -42,10 +51,48 @@ const SignIn = () => {
     resolver: yupResolver(schema),
   })
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async ({ email, password }) => {
     setIsLoading(true)
-    console.log({ data })
-    setIsLoading(false)
+    try {
+      await signIn('credentials', { email, password, redirect: false })
+        .then((response) => {
+          if (response?.error) {
+            toast({
+              title: response?.error,
+              status: 'error',
+            })
+          } else if (!response?.error && response?.ok) {
+            toast({
+              title: `Login to your account is successful!`,
+            })
+          }
+        })
+        .finally(() => {
+          setIsLoading(false)
+        })
+    } catch (error) {
+      console.error(error)
+      toast({
+        title: `Something went wrong with credential sign in!`,
+        status: 'error',
+      })
+      setIsLoading(false)
+    }
+  }
+
+  const socialSignInAction = async (name: 'github' | 'google') => {
+    setIsLoading(true)
+    try {
+      await signIn(name, { redirect: false, callbackUrl: '/sign-in' })
+      setIsLoading(false)
+    } catch (error) {
+      console.error(error)
+      toast({
+        title: `Something went wrong with ${name} sign in!`,
+        status: 'error',
+      })
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -71,11 +118,17 @@ const SignIn = () => {
       <DividerWithContent>continue with</DividerWithContent>
 
       <SimpleGrid columns={2} spacing={5} width="full">
-        <SocialButton icon={AiFillGithub} />
-        <SocialButton icon={AiOutlineGoogle} />
+        <SocialButton
+          icon={AiFillGithub}
+          onClick={() => socialSignInAction('github')}
+        />
+        <SocialButton
+          icon={AiOutlineGoogle}
+          onClick={() => socialSignInAction('google')}
+        />
       </SimpleGrid>
 
-      <DividerWithContent>or</DividerWithContent>
+      <DividerWithContent>Don`t have an account yet?</DividerWithContent>
 
       <Button
         type="button"
@@ -84,7 +137,7 @@ const SignIn = () => {
         size="md"
         onClick={goToSignUpPage}
       >
-        Create account
+        Sign Up
       </Button>
     </Box>
   )

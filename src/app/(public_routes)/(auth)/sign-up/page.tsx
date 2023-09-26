@@ -42,7 +42,6 @@ const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors, dirtyFields },
-    reset,
   } = useForm({
     mode: 'onChange',
     defaultValues: {
@@ -64,24 +63,19 @@ const SignUp = () => {
       await axios
         .post('/api/sign-up', { name, email, password })
         .then(() => {
-          reset()
+          toast({
+            title: `Account created!`,
+          })
+          goToSignInPage()
         })
         .finally(() => {
           setIsLoading(false)
         })
-      toast({
-        position: 'top',
-        title: `Account created!`,
-        status: 'success',
-        isClosable: true,
-      })
     } catch (error) {
       if (axios.isAxiosError(error)) {
         toast({
-          position: 'top',
           title: `${error.response?.data}`,
           status: 'error',
-          isClosable: true,
         })
       }
       setIsLoading(false)
@@ -128,7 +122,7 @@ const SignUp = () => {
         </VStack>
       </form>
 
-      <DividerWithContent>or</DividerWithContent>
+      <DividerWithContent>Already have an account?</DividerWithContent>
 
       <Button
         type="button"
@@ -137,7 +131,7 @@ const SignUp = () => {
         size="md"
         onClick={goToSignInPage}
       >
-        Go back to login
+        Sign In
       </Button>
     </Box>
   )
