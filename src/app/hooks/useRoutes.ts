@@ -1,4 +1,4 @@
-import { useConversation } from '@/app/(private_routes)/(chat-room)/_hooks/useConversation'
+import { useConversation } from '@/app/hooks/useConversation'
 import { As } from '@chakra-ui/react'
 import { usePathname } from 'next/navigation'
 import { useMemo } from 'react'
@@ -14,7 +14,7 @@ export interface RouteOptions {
 }
 
 const PATHNAME = {
-  conversations: '/',
+  conversations: '/conversations',
   users: '/users',
 }
 
