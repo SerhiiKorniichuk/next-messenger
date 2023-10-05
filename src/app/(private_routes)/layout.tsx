@@ -1,6 +1,6 @@
 'use client'
 
-import { Loader } from '@/components/Loader/Loader'
+import { Loader } from '@/app/components/Loader/Loader'
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
 import { FC, ReactNode } from 'react'
