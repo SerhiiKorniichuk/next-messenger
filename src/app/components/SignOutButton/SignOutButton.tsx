@@ -1,4 +1,4 @@
-import { NavigationButton } from '@/app/(private_routes)/(chat-room)/_components/NavigationButton/NavigationButton'
+import { NavigationButton } from '@/app/components/NavigationButton/NavigationButton'
 import { signOut } from 'next-auth/react'
 import { FC } from 'react'
 import { IoLogOut } from 'react-icons/io5'

@@ -1,4 +1,4 @@
-import { RouteOptions } from '@/app/(private_routes)/(chat-room)/_hooks/useRoutes'
+import { RouteOptions } from '@/app/hooks/useRoutes'
 import { Box, Icon } from '@chakra-ui/react'
 import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
@@ -36,7 +36,7 @@ export const NavigationButton: FC<NavigationButtonProps> = ({
       )}
       onClick={handleClick}
     >
-      <Icon as={icon} width={6} height={6} />
+      <Icon as={icon} width={8} height={8} />
     </Box>
   )
 }
