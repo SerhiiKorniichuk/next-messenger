@@ -1,4 +1,5 @@
 import { getSession } from '@/app/actions/getSession'
+import prisma from '@/libs/prismadb'
 
 export const getCurrentUser = async () => {
   try {
@@ -8,7 +9,7 @@ export const getCurrentUser = async () => {
       return null
     }
 
-    const currentUser = await prisma?.user.findUnique({
+    const currentUser = await prisma.user.findUnique({
       where: {
         email: session.user.email,
       },
