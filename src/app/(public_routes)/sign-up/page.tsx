@@ -1,8 +1,8 @@
 'use client'
 
-import { DividerWithContent } from '@/components/DividerWithContent/DividerWithContent'
-import { InputPassword } from '@/components/InputPassword/InputPassword'
-import { InputValidation } from '@/components/InputValidation/InputValidation'
+import { DividerWithContent } from '@/app/components/DividerWithContent/DividerWithContent'
+import { InputPassword } from '@/app/components/InputPassword/InputPassword'
+import { InputValidation } from '@/app/components/InputValidation/InputValidation'
 import { Box, Button, Input, Text, useToast, VStack } from '@chakra-ui/react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import axios from 'axios'

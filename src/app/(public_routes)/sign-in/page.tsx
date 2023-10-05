@@ -1,9 +1,9 @@
 'use client'
 
-import { DividerWithContent } from '@/components/DividerWithContent/DividerWithContent'
-import { InputPassword } from '@/components/InputPassword/InputPassword'
-import { InputValidation } from '@/components/InputValidation/InputValidation'
-import { SocialButton } from '@/components/SocialButton/SocialButton'
+import { DividerWithContent } from '@/app/components/DividerWithContent/DividerWithContent'
+import { InputPassword } from '@/app/components/InputPassword/InputPassword'
+import { InputValidation } from '@/app/components/InputValidation/InputValidation'
+import { SocialButton } from '@/app/components/SocialButton/SocialButton'
 import {
   Box,
   Button,
@@ -60,10 +60,6 @@ const SignIn = () => {
             toast({
               title: response?.error,
               status: 'error',
-            })
-          } else if (!response?.error && response?.ok) {
-            toast({
-              title: `Login to your account is successful!`,
             })
           }
         })
