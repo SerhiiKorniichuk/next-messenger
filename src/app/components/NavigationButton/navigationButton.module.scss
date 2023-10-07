@@ -1,0 +1,23 @@
+.container {
+  padding: 0.75rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: var(--chakra-colors-gray-400);
+  background-color: transparent;
+  transition-property: var(--chakra-transition-property-common);
+  transition-duration: var(--chakra-transition-duration-fast);
+  transform-style: var(--chakra-transition-easing-ease-in-out);
+
+  &:not(.active) {
+    cursor: pointer;
+
+    &:hover {
+      color: var(--chakra-colors-gray-500)
+    }
+  }
+
+  &.active {
+    color: var(--chakra-colors-gray-700);
+  }
+}

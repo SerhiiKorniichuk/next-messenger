@@ -1,3 +1,5 @@
+import { AuthContext } from '@/app/context/AuthContext'
+import { ChakraContext } from '@/app/context/ChakraContext'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { ReactNode } from 'react'
@@ -12,8 +14,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" data-theme="light">
+      <body className={inter.className}>
+        <ChakraContext>
+          <AuthContext>{children}</AuthContext>
+        </ChakraContext>
+      </body>
     </html>
   )
 }
