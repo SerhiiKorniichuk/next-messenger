@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react'
 
-const ChatRoom = () => {
+const ConversationPlaceholder = () => {
   return (
     <Box
       width="100%"
@@ -15,4 +15,4 @@ const ChatRoom = () => {
   )
 }
 
-export default ChatRoom
+export default ConversationPlaceholder

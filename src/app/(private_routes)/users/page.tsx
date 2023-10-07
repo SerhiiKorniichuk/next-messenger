@@ -1,7 +1,7 @@
-import ChatRoom from '@/app/components/ChatRoom/ChatRoom'
+import ConversationPlaceholder from '@/app/components/ConversationPlaceholder/ConversationPlaceholder'
 
 const Users = () => {
-  return <ChatRoom />
+  return <ConversationPlaceholder />
 }
 
 export default Users
